@@ -1,2 +1,2 @@
 # agoni-shop-ssm
-基于SSM的网站商城
+基于SpringCloud的微服务网站商城
