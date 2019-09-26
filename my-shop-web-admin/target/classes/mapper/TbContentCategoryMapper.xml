@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.agoni.my.shop.web.admin.dao.TbContentCategoryDao">
+
+    <sql id="tbContentCategoryColumns">
+        b.id,
+        b.name,
+        b.status,
+        b.sort_order AS sortOrder,
+        b.is_parent AS typeOfParent,
+        b.created,
+        b.updated,
+        IFNULL (c.id, '0') AS "parent.id",
+        IFNULL (c.name, '/') AS "parent.name"
+    </sql>
+
+    <sql id="tbContentCategoryJoins">
+        LEFT JOIN tb_content_category AS c ON b.parent_id = c.id
+    </sql>
+
+    <select id="selectAll" resultType="TbContentCategory">
+        SELECT
+          <include refid="tbContentCategoryColumns"/>
+        FROM
+          tb_content_category AS b
+          <include refid="tbContentCategoryJoins"/>
+        ORDER BY
+          b.parent_id ASC,
+          b.sort_order ASC,
+          b.name ASC,
+          b.is_parent DESC
+    </select>
+
+    <select id="selectByPid" resultType="TbContentCategory">
+        SELECT
+        <include refid="tbContentCategoryColumns"/>
+        FROM
+        tb_content_category AS b
+        <include refid="tbContentCategoryJoins"/>
+        WHERE b.parent_id = #{parentId}
+    </select>
+
+    <select id="getById" resultType="TbContentCategory">
+        SELECT
+        <include refid="tbContentCategoryColumns"/>
+        FROM
+        tb_content_category AS b
+        <include refid="tbContentCategoryJoins"/>
+        WHERE b.id = #{id}
+    </select>
+
+    <insert id="insert">
+        INSERT INTO tb_content_category (
+          `parent_id`,
+          `name`,
+          `status`,
+          `sort_order`,
+          `is_parent`,
+          `created`,
+          `updated`
+        )
+        VALUES
+          (
+            #{parent.id},
+            #{name},
+            #{status},
+            #{sortOrder},
+            #{typeOfParent},
+            #{created},
+            #{updated}
+          );
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM tb_content_category
+        WHERE id IN
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="update">
+        UPDATE
+          tb_content_category
+        SET
+          `id` = #{id},
+          `parent_id` = #{parent.id},
+          `name` = #{name},
+          `status` = #{status},
+          `sort_order` = #{sortOrder},
+          `is_parent` = #{typeOfParent},
+          `created` = #{created},
+          `updated` = #{updated}
+        WHERE `id` = #{id}
+    </update>
+</mapper>

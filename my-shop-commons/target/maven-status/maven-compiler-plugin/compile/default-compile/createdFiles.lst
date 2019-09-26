@@ -1,0 +1,15 @@
+com\agoni\my\shop\commons\utils\HttpClientUtils.class
+com\agoni\my\shop\commons\persistence\BaseTreeEntity.class
+com\agoni\my\shop\commons\utils\MapperUtils.class
+com\agoni\my\shop\commons\persistence\BaseEntity.class
+com\agoni\my\shop\commons\validator\BeanValidator.class
+com\agoni\my\shop\commons\dto\BaseResult.class
+com\agoni\my\shop\commons\utils\RegexpUtils.class
+com\agoni\my\shop\commons\utils\EmailSendUtils.class
+com\agoni\my\shop\commons\persistence\BaseService.class
+com\agoni\my\shop\commons\persistence\BaseTreeDao.class
+com\agoni\my\shop\commons\utils\MapperUtils$1.class
+com\agoni\my\shop\commons\constant\ConstantUtils.class
+com\agoni\my\shop\commons\persistence\BaseTreeService.class
+com\agoni\my\shop\commons\persistence\BaseDao.class
+com\agoni\my\shop\commons\dto\PageInfo.class
